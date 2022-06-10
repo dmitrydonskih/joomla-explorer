@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2" method="upgrade">
     <name>COM_LOGICALDOC</name>
-    <creationDate>2022-04-16</creationDate>
+    <creationDate>2022-06-10</creationDate>
     <author>LogicalDOC</author>
     <authorEmail>support@logicaldoc.com</authorEmail>
     <authorUrl>https://www.logicaldoc.com</authorUrl>
     <copyright>(C) 2006-2022 LogicalDOC</copyright>
     <license>GNU/GPL v2 or later http://www.gnu.org/licenses/gpl-2.0.html</license>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <description>COM_LOGICALDOC_DESCRIPTION</description>
     <install>
         <sql>

@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
  
-define('_JEXEC', 1); //make j! happy
+defined('_JEXEC') or die;
 require_once('clase.php');
 require_once('IconSelector.php');
 $idCondiguracion = $_GET['id'];
