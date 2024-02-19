@@ -1,7 +1,7 @@
 <?php
 /**
  *  
- * Copyright (c) 2006-2022 LogicalDOC
+ * Copyright (c) 2006-2024 LogicalDOC
  * WebSites: www.logicaldoc.com
  * 
  * No bytes were intentionally harmed during the development of this application.
@@ -45,37 +45,37 @@ defined('_JEXEC') or die;
 <?php
 if (!defined('DS'))
     define('DS', DIRECTORY_SEPARATOR);
-$controller = JRequest::getVar('view');
+$controller = JFactory::getApplication()->input->get('view');
 switch ($controller) {
     case 'explorer':
         require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
-        $controller->execute(JRequest::getCmd('task'));
+        $controller->execute(JFactory::getApplication()->input->get('task'));
         $controller->redirect();
         break;
     case 'search':
         require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
-        $controller->execute(JRequest::getCmd('task'));
+        $controller->execute(JFactory::getApplication()->input->get('task'));
         $controller->redirect();
         break;
     case 'configuration':
         require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
-        $controller->execute(JRequest::getCmd('task'));
+        $controller->execute(JFactory::getApplication()->input->get('task'));
         $controller->redirect();
         break;
 	default:
         $controller = 'configuration';
-        JRequest::setVar('view', $controller);
-		JRequest::setVar('layout', 'listconfiguration');
+        JFactory::getApplication()->input->set('view', $controller);
+		JFactory::getApplication()->input->set('layout', 'listconfiguration');
         require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
-        $controller->execute(JRequest::getCmd('task'));
+        $controller->execute(JFactory::getApplication()->input->get('task'));
         $controller->redirect();
 }
 ?>

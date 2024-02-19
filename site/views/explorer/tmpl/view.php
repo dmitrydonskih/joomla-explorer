@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2006-2022 LogicalDOC
+ * Copyright (c) 2006-2024 LogicalDOC
  * WebSites: www.logicaldoc.com
  * 
  * No bytes were intentionally harmed during the development of this application.
@@ -122,7 +122,6 @@ require_once (JPATH_COMPONENT . DS . 'IconSelector.php');
 <?php
 
 function printFolder($folder, $rowConfiguration, $exitemid = null) { 
-
     $folderUrl = "index.php?option=com_logicaldoc&view=explorer&task=folder&folderID=" .$folder->id;
     if (!empty($exitemid)) {
        $folderUrl = $folderUrl ."&Itemid=" .$exitemid;
@@ -159,8 +158,15 @@ function printDocument($document, $rowConfiguration) {
         <td align="center">
             <img src="components/com_logicaldoc/assets/mimes/<?php echo IconSelector::selectIcon($document->type); ?>" />            
         </td>
-        <td>            
-            <a  href="components/com_logicaldoc/download.php?id=<?php echo $rowConfiguration->idConfiguration;?>&documentID=<?php echo $document->id; ?>" >                
+        <td>   
+            <?php /* <a  href="components/com_logicaldoc/download.php?id=<?php echo $rowConfiguration->idConfiguration;?>&documentID=<?php echo $document->id; ?>" >                
+            <?php echo $document->fileName; ?>
+            </a>  */ ?>
+        
+            <?php 
+            $download_url = JRoute::_('index.php?option=com_logicaldoc&view=explorer&task=document&id='.$rowConfiguration->idConfiguration.'&documentID='.$document->id,false);
+            ?>
+            <a href="<?php echo $download_url;?>">                
                 <?php echo $document->fileName; ?>
             </a>               
         </td>
@@ -292,7 +298,7 @@ if ($this->entrar == 0) {
             -->
 			<?php 
       
- 		    $exitemid = JRequest::getVar('Itemid');
+ 		    $exitemid = JFactory::getApplication()->input->get('Itemid');
  			//echo "exitemid: " .$exitemid ."<br/>";
      
             $canprint = 0;

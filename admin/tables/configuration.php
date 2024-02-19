@@ -2,7 +2,7 @@
 
 /**
  *  
- * Copyright (c) 2006-2022 LogicalDOC
+ * Copyright (c) 2006-2024 LogicalDOC
  * WebSites: www.logicaldoc.com
  * 
  * No bytes were intentionally harmed during the development of this application.
@@ -45,5 +45,6 @@ class TableConfiguration extends JTable {
     }
 
 }
+
 
 ?>
