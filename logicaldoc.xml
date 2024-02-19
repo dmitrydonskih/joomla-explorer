@@ -62,8 +62,7 @@
     </administration>
 	
 	<updateservers>
-		<!-- Note: No spaces or linebreaks allowed between the server tags -->
-		<server type="extension" name="LogicalDOC Update Site">https://github.com/logicaldoc/joomla-explorer/raw/main/manifest.xml</server>
+		<server type="collection" priority="1" name="LogicalDOC Update Site">https://raw.githubusercontent.com/logicaldoc/joomla-explorer/main/extensions.xml</server>
 	</updateservers>
 
 </extension>

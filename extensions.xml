@@ -1,0 +1,5 @@
+<extensionset name="LogicalDOC Extensions" description="LogicalDOC Extensions update site">    
+    <!-- Components -->
+    <extension name="LogicalDOC Joomla Explorer" element="LogicalDOC" type="component" version="4.0.0" client="site" folder="" targetplatform="joomla" targetplatformversion="4\.*" detailsurl="https://raw.githubusercontent.com/logicaldoc/joomla-explorer/main/logicaldoc.xml" infourl="https://wiki.logicaldoc.com/wiki/LogicalDOC_Joomla_Explorer"/>
+</extensionset>
+
