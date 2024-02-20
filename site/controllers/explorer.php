@@ -68,7 +68,7 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         $content = $getContent->return;
         $fileSize = $properties->fileSize;
 
-        error_reporting(0);
+        //error_reporting(0);
         ob_end_clean();
 
         header("Expires: 0"); // Date in the past
@@ -82,14 +82,14 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         $mimeType = IconSelector::get_mime_type($properties->type);
         header('Content-Type: ' . $mimeType);
         header('Content-Disposition: attachment; filename="' . $properties->fileName . '"');
-        //flush();
+
         echo $content;
         exit();
     }
 
     public function download()
     {
-        error_reporting(0);
+        //error_reporting(0);
         ob_end_clean();
         require_once(JPATH_COMPONENT . DS .'download.php');
         exit();
@@ -118,7 +118,6 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
 
     public function searchBasic()
     {
-        error_log('explorer.php searchBasic()');
         JFactory::getApplication()->input->set('view', 'search');
         JFactory::getApplication()->input->set('layout', 'result');
         JFactory::getApplication()->input->set('contenido', JFactory::getApplication()->input->get('contenido'));
