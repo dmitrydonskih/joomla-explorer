@@ -44,11 +44,11 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
     
     public function downloadLong()
     {
-        require_once(JPATH_COMPONENT . DS .'clase.php');
-        require_once(JPATH_COMPONENT . DS .'IconSelector.php');
+        require_once(JPATH_COMPONENT . '/clase.php');
+        require_once(JPATH_COMPONENT . '/IconSelector.php');
 
-        $configID = $_GET['id'];
-        $docID = $_GET['documentID'];
+        $configID = JFactory::getApplication()->input->get('id');
+        $docID = JFactory::getApplication()->input->get('documentID');
 
         $modelConfiguration = new Configuration($configID);
         $user = $user = $modelConfiguration->getUsuario();
@@ -68,7 +68,6 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         $content = $getContent->return;
         $fileSize = $properties->fileSize;
 
-        //error_reporting(0);
         ob_end_clean();
 
         header("Expires: 0"); // Date in the past
@@ -89,15 +88,14 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
 
     public function download()
     {
-        //error_reporting(0);
         ob_end_clean();
-        require_once(JPATH_COMPONENT . DS .'download.php');
+        require_once(JPATH_COMPONENT . '/download.php');
         exit();
     }
 
     public function enviar()
     {
-        require_once(JPATH_COMPONENT . DS . 'tables' . DS . 'configuration.php');
+        require_once(JPATH_COMPONENT . '/tables/configuration.php');
         $rowConfiguration = &JTable::getInstance('Configuration', 'Table');
         $id = JFactory::getApplication()->input->get('id');
         $rowConfiguration->load($id);

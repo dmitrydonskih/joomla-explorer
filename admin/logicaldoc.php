@@ -43,26 +43,10 @@ defined('_JEXEC') or die;
 <script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery.dataTables-1.9.4.js'; ?>"></script>
 
 <?php
-if (!defined('DS'))
-    define('DS', DIRECTORY_SEPARATOR);
 $controller = JFactory::getApplication()->input->get('view');
 switch ($controller) {
-    case 'explorer':
-        require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
-        $controllerName = 'LogicalDOCController' . $controller;
-        $controller = new $controllerName();
-        $controller->execute(JFactory::getApplication()->input->get('task'));
-        $controller->redirect();
-        break;
-    case 'search':
-        require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
-        $controllerName = 'LogicalDOCController' . $controller;
-        $controller = new $controllerName();
-        $controller->execute(JFactory::getApplication()->input->get('task'));
-        $controller->redirect();
-        break;
     case 'configuration':
-        require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
+        require_once(JPATH_COMPONENT . '/controllers/' . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
         $controller->execute(JFactory::getApplication()->input->get('task'));
@@ -72,7 +56,7 @@ switch ($controller) {
         $controller = 'configuration';
         JFactory::getApplication()->input->set('view', $controller);
 		JFactory::getApplication()->input->set('layout', 'listconfiguration');
-        require_once(JPATH_COMPONENT . DS . 'controllers' . DS . $controller . '.php');
+        require_once(JPATH_COMPONENT . '/controllers/' . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
         $controller->execute(JFactory::getApplication()->input->get('task'));

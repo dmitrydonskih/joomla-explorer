@@ -21,7 +21,7 @@
  */
 defined('_JEXEC') or die;
 
-require_once (JPATH_COMPONENT . DS . 'IconSelector.php');
+require_once (JPATH_COMPONENT . '/IconSelector.php');
 ?>
 
 <style>
