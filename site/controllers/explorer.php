@@ -42,33 +42,18 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         parent::display();
     }
     
-    public function document()
+    public function downloadLong()
     {
-        // require_once('clase.php');
-        // require_once('IconSelector.php');
-        $idCondiguracion = $_GET['id'];
-        $docID = $_GET['documentID'];
-        // echo $docID;exit;
-        // $modelConfiguration = new Configuration();
-        if ($idCondiguracion != 0) {
-            $db = JFactory::getDbo();
-            $query = "SELECT idConfiguration, name, username, password, url FROM jos_logicaldoc_configuration WHERE idConfiguration = " . $idCondiguracion;
-            $db->setQuery($query);
-            $row = $db->loadRow();
-            $this->idConfiguration = $row[0];
-            $this->name = $row[1];
-            $this->username = $row[2];
-            $this->password = $row[3];
-            $this->url = $row[4];
-        }
+        require_once(JPATH_COMPONENT . DS .'clase.php');
+        require_once(JPATH_COMPONENT . DS .'IconSelector.php');
 
-        // $modelConfiguration->Configuration($idCondiguracion);
-        // $user = $modelConfiguration->getUsuario();
-        // $password = $modelConfiguration->getPassword();
-        // $url = $modelConfiguration->getURL();
-        $user = $this->username;
-        $password = $this->password;
-        $url = $this->url;
+        $configID = $_GET['id'];
+        $docID = $_GET['documentID'];
+
+        $modelConfiguration = new Configuration($configID);
+        $user = $user = $modelConfiguration->getUsuario();
+        $password = $modelConfiguration->getPassword();
+        $url = $modelConfiguration->getURL();
 
         // Register WSDL
         $LDAuth = new SoapClient($url . '/services/Auth?wsdl');
@@ -82,39 +67,34 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         $getContent = $LDDocument->getContent(array('sid' => $token, 'docId' => $docID));
         $content = $getContent->return;
         $fileSize = $properties->fileSize;
-        /* echo "<pre>"; print_r($properties); exit; */
+
         error_reporting(0);
-        /* ini_set('display_errors', false); */
         ob_end_clean();
 
         header("Expires: 0"); // Date in the past
         header("Cache-Control: must-revalidate"); // HTTP/1.1
         header('Pragma: public');
-        $mimeType = "application/octet-stream";
-
-        if (!empty($properties->type)) {
-            $properties->type = strtolower($properties->type);
-        }
-        // our list of mime types
-        $mime_types = array("pdf" => "application/pdf", "txt" => "text/plain", "gif" => "image/gif", "png" => "image/png", "jpeg,jpg" => "image/jpg", "doc" => "application/msword", "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "xls" => "application/vnd.ms-excel", "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ppt" => "application/vnd.ms-powerpoint", "pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation", "zip" => "application/zip", "htm,html" => "text/html", "xml" => "application/xml", "eml" => "message/rfc822", "msg" => "application/vnd.ms-outlook", "mp3" => "audio/mpeg", "wav" => "audio/x-wav", "mpeg,mpg,mpe" => "video/mpeg", "mov" => "video/quicktime", "avi" => "video/x-msvideo", "css" => "text/css", "js" => "application/javascript", "php" => "text/html", "exe" => "application/octet-stream"
-        );
-        foreach ($mime_types as $key => $value) {
-            if (strpos($key, $properties->type) !== false) {
-                $mimeType = $value;
-                break;
-            }
-        }
         header('Content-Description: File Transfer');
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
         header('Content-length: ' . $fileSize);
-        // $mimeType = IconSelector::get_mime_type($properties->type);
+
+        $mimeType = IconSelector::get_mime_type($properties->type);
         header('Content-Type: ' . $mimeType);
         header('Content-Disposition: attachment; filename="' . $properties->fileName . '"');
-        flush();
+        //flush();
         echo $content;
-    } 
-    
+        exit();
+    }
+
+    public function download()
+    {
+        error_reporting(0);
+        ob_end_clean();
+        require_once(JPATH_COMPONENT . DS .'download.php');
+        exit();
+    }
+
     public function enviar()
     {
         require_once(JPATH_COMPONENT . DS . 'tables' . DS . 'configuration.php');
@@ -133,13 +113,6 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         }
         JFactory::getApplication()->input->set('entrar', $entrar);
         JFactory::getApplication()->input->set('mensaje', $mensaje);
-        $this->display();
-    }
-
-    public function download()
-    {
-        JFactory::getApplication()->input->set('view', 'explorer');
-        JFactory::getApplication()->input->set('layout', 'download');
         $this->display();
     }
 

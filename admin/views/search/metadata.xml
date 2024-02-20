@@ -1,7 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: metadata.xml 15576 2010-03-25 12:43:26Z louis $ -->
-<metadata>
-	<view title="Search">
-		<message><![CDATA[Busquedas Avanzadas]]></message>
-	</view>
-</metadata>
+<?xml version="1.0" encoding="utf-8"?>	<!-- $Id: metadata.xml 15576 2010-03-25 12:43:26Z louis $ --><metadata>	<view title="Search">		<message><![CDATA[Busquedas Avanzadas]]></message>	</view></metadata>

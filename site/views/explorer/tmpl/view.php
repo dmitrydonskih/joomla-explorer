@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
 require_once (JPATH_COMPONENT . DS . 'IconSelector.php');
 ?>
 
-<style type="text/css">
+<style>
     #basic {
         padding: 10px;
     }
@@ -67,7 +67,17 @@ require_once (JPATH_COMPONENT . DS . 'IconSelector.php');
             "aoColumns": [
                 {"bSortable": false, "bSearchable": false, "bVisible": iconValor},
                 {"bSortable": true, "bVisible": true},
-                {"bSortable": false, "bVisible": sizeValor},
+                {"bSortable": true, "bVisible": sizeValor,
+                    "mRender": function(size, type, full) {
+                        if (type == 'display') {
+                            if (size === '0') {return '0 KB';}
+                            if (size == 0) {return ' ';}
+                            var sizek = Math.floor( size / 1024 ).toFixed(0) * 1;
+                            return sizek.toLocaleString() + ' KB';
+                        }
+                        return size;
+                    }
+                },
                 {"bSortable": true, "bVisible": updateDateValor,
 					"mRender": function(date, type, full) {
 									if (type == 'display') {
@@ -128,8 +138,8 @@ function printFolder($folder, $rowConfiguration, $exitemid = null) {
 	}
 	?>
     <tr>       
-        <td align="center">
-		   <img src="components/com_logicaldoc/assets/images/menuitem_childs.png" />   
+        <td>
+		   <img style="text-align: center" src="components/com_logicaldoc/assets/images/menuitem_childs.png" />
         </td>
         <td>
             <a href="<?php echo $folderUrl; ?>" >
@@ -155,24 +165,18 @@ function printFolder($folder, $rowConfiguration, $exitemid = null) {
 function printDocument($document, $rowConfiguration) {
     ?>
     <tr>
-        <td align="center">
-            <img src="components/com_logicaldoc/assets/mimes/<?php echo IconSelector::selectIcon($document->type); ?>" />            
+        <td>
+            <img style="text-align: center" src="components/com_logicaldoc/assets/mimes/<?php echo IconSelector::selectIcon($document->type); ?>" />
         </td>
-        <td>   
-            <?php /* <a  href="components/com_logicaldoc/download.php?id=<?php echo $rowConfiguration->idConfiguration;?>&documentID=<?php echo $document->id; ?>" >                
-            <?php echo $document->fileName; ?>
-            </a>  */ ?>
-        
+        <td>
             <?php 
-            $download_url = JRoute::_('index.php?option=com_logicaldoc&view=explorer&task=document&id='.$rowConfiguration->idConfiguration.'&documentID='.$document->id,false);
+            $download_url = JRoute::_('index.php?option=com_logicaldoc&view=explorer&task=download&id='.$rowConfiguration->idConfiguration.'&documentID='.$document->id, false);
             ?>
             <a href="<?php echo $download_url;?>">                
                 <?php echo $document->fileName; ?>
             </a>               
         </td>
-        <td>
-            <?php echo formatSize($document->fileSize); ?>
-        </td>
+        <td style="white-space: nowrap; text-align: right;"><?php echo $document->fileSize; ?></td>
         <td>
             <?php
 			$ymd = DateTime::createFromFormat('Y-m-d H:i:s O', $document->date);
@@ -193,20 +197,6 @@ function printDocument($document, $rowConfiguration) {
 function redondear($numero, $decimales) {
     $factor = pow(10, $decimales);
     return (round($numero * $factor) / $factor);
-}
-
-function formatSize($size) {
-    $srt = "BIG";
-    if ($size / 1024 < 1) {
-        $srt = $size . " byte";
-    } else if ($size / 1048576 < 1) {
-        $srt = redondear(($size / 1024), 1) . " kB";
-    } else if ($size / 1073741824 < 1) {
-        $srt = redondear(($size / 1048576), 1) . " MB";
-    } else if ($size / 1099511627776 < 1) {
-        $srt = redondear(($size / 1073741824), 1) . " GB";
-    } 
-    return $srt;
 }
 
 if ($this->entrar == 0) {
@@ -299,7 +289,6 @@ if ($this->entrar == 0) {
 			<?php 
       
  		    $exitemid = JFactory::getApplication()->input->get('Itemid');
- 			//echo "exitemid: " .$exitemid ."<br/>";
      
             $canprint = 0;
             $startFolder = $this->rowConfiguration->ldFolderID;  
