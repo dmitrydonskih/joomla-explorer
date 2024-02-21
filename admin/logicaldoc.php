@@ -21,6 +21,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
 ?>
 <!--Estilo para la tabla-->
 <link type="text/css" href="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/css/datatables/datatables.ui.css'; ?>" rel="stylesheet" />
@@ -43,23 +45,23 @@ defined('_JEXEC') or die;
 <script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery.dataTables-1.9.4.js'; ?>"></script>
 
 <?php
-$controller = JFactory::getApplication()->input->get('view');
+$controller = Factory::getApplication()->input->get('view');
 switch ($controller) {
     case 'configuration':
         require_once(JPATH_COMPONENT . '/controllers/' . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
-        $controller->execute(JFactory::getApplication()->input->get('task'));
+        $controller->execute(Factory::getApplication()->input->get('task'));
         $controller->redirect();
         break;
 	default:
         $controller = 'configuration';
-        JFactory::getApplication()->input->set('view', $controller);
-		JFactory::getApplication()->input->set('layout', 'listconfiguration');
+        Factory::getApplication()->input->set('view', $controller);
+		Factory::getApplication()->input->set('layout', 'listconfiguration');
         require_once(JPATH_COMPONENT . '/controllers/' . $controller . '.php');
         $controllerName = 'LogicalDOCController' . $controller;
         $controller = new $controllerName();
-        $controller->execute(JFactory::getApplication()->input->get('task'));
+        $controller->execute(Factory::getApplication()->input->get('task'));
         $controller->redirect();
 }
 ?>

@@ -23,7 +23,9 @@
  */
 defined('_JEXEC') or die;
 
-class TableConfiguration extends JTable {
+use Joomla\CMS\Table\Table;
+
+class TableConfiguration extends Table {
 
     public $idConfiguration;
     public $name;

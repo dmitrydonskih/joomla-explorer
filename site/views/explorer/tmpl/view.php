@@ -22,6 +22,10 @@
 defined('_JEXEC') or die;
 
 require_once (JPATH_COMPONENT . '/IconSelector.php');
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 ?>
 
 <style>
@@ -32,12 +36,12 @@ require_once (JPATH_COMPONENT . '/IconSelector.php');
 <script type="text/javascript">
 
     $(document).ready(function() {
-        var iDisplayLength = <?php echo $this->rowConfiguration->showEntries; ?>;
-        var icon = <?php echo $this->rowConfiguration->icon; ?>;
-        var size = <?php echo $this->rowConfiguration->size; ?>;
-        var updateDate = <?php echo $this->rowConfiguration->updateDate; ?>;
-        var author = <?php echo $this->rowConfiguration->author; ?>;
-        var version = <?php echo $this->rowConfiguration->version; ?>;
+        var iDisplayLength = <?= $this->rowConfiguration->showEntries ?>;
+        var icon = <?= $this->rowConfiguration->icon ?>;
+        var size = <?= $this->rowConfiguration->size ?>;
+        var updateDate = <?= $this->rowConfiguration->updateDate ?>;
+        var author = <?= $this->rowConfiguration->author ?>;
+        var version = <?= $this->rowConfiguration->version ?>;
         var iconValor = false;
         var sizeValor = false;
         var updateDateValor = false;
@@ -92,20 +96,20 @@ require_once (JPATH_COMPONENT . '/IconSelector.php');
             ],
             "aaSorting": [[0, "asc"]],
             "oLanguage": {
-                "sProcessing": "<?php echo JText::_('COM_LOGICALDOC_PLEASE_WAIT') ?>",
-                "sLengthMenu": "<?php echo JText::_('COM_LOGICALDOC_SHOW') ?>_MENU_ <?php echo JText::_('COM_LOGICALDOC_ENTRIES') ?>",
-                "sZeroRecords": "<?php echo JText::_('COM_LOGICALDOC_NOTHING_FOUND_SORRY') ?>",
-                "sInfo": "<?php echo JText::_('COM_LOGICALDOC_SHOWING') ?>_START_ <?php echo JText::_('COM_LOGICALDOC_TO') ?> _END_ <?php echo JText::_('COM_LOGICALDOC_OF') ?> _TOTAL_ <?php echo JText::_('COM_LOGICALDOC_ENTRIES') ?>",
-                "sInfoEmpty": "<?php echo JText::_('COM_LOGICALDOC_SHOWING') ?> 0 <?php echo JText::_('COM_LOGICALDOC_TO') ?> 0 <?php echo JText::_('COM_LOGICALDOC_OF') ?> 0 <?php echo JText::_('COM_LOGICALDOC_ENTRIES') ?>",
-                "sInfoFiltered": "(<?php echo JText::_('COM_LOGICALDOC_FILTERED_FROM') ?> _MAX_ <?php echo JText::_('COM_LOGICALDOC_TOTAL_ENTRIES') ?>)",
+                "sProcessing": "<?= Text::_('COM_LOGICALDOC_PLEASE_WAIT') ?>",
+                "sLengthMenu": "<?= Text::_('COM_LOGICALDOC_SHOW') ?>_MENU_ <?= Text::_('COM_LOGICALDOC_ENTRIES') ?>",
+                "sZeroRecords": "<?= Text::_('COM_LOGICALDOC_NOTHING_FOUND_SORRY') ?>",
+                "sInfo": "<?= Text::_('COM_LOGICALDOC_SHOWING') ?>_START_ <?= Text::_('COM_LOGICALDOC_TO') ?> _END_ <?= Text::_('COM_LOGICALDOC_OF') ?> _TOTAL_ <?= Text::_('COM_LOGICALDOC_ENTRIES') ?>",
+                "sInfoEmpty": "<?= Text::_('COM_LOGICALDOC_SHOWING') ?> 0 <?= Text::_('COM_LOGICALDOC_TO') ?> 0 <?= Text::_('COM_LOGICALDOC_OF') ?> 0 <?= Text::_('COM_LOGICALDOC_ENTRIES') ?>",
+                "sInfoFiltered": "(<?= Text::_('COM_LOGICALDOC_FILTERED_FROM') ?> _MAX_ <?= Text::_('COM_LOGICALDOC_TOTAL_ENTRIES') ?>)",
                 "sInfoPostFix": "",
-                "sSearch": "<?php echo JText::_('COM_LOGICALDOC_SEARCH'); ?>",
+                "sSearch": "<?= Text::_('COM_LOGICALDOC_SEARCH') ?>",
                 "sUrl": "",
                 "oPaginate": {
-                    "sFirst": "<?php echo JText::_('COM_LOGICALDOC_FIRST') ?>",
-                    "sPrevious": "<?php echo JText::_('COM_LOGICALDOC_PREVIOUS') ?>",
-                    "sNext": "<?php echo JText::_('COM_LOGICALDOC_NEXT') ?>",
-                    "sLast": "<?php echo JText::_('COM_LOGICALDOC_LAST') ?>"
+                    "sFirst": "<?= Text::_('COM_LOGICALDOC_FIRST') ?>",
+                    "sPrevious": "<?= Text::_('COM_LOGICALDOC_PREVIOUS') ?>",
+                    "sNext": "<?= Text::_('COM_LOGICALDOC_NEXT') ?>",
+                    "sLast": "<?= Text::_('COM_LOGICALDOC_LAST') ?>"
                 }
             }
         });
@@ -170,7 +174,7 @@ function printDocument($document, $rowConfiguration) {
         </td>
         <td>
             <?php 
-            $download_url = JRoute::_('index.php?option=com_logicaldoc&view=explorer&task=download&id='.$rowConfiguration->idConfiguration.'&documentID='.$document->id, false);
+            $download_url = Route::_('index.php?option=com_logicaldoc&view=explorer&task=download&id='.$rowConfiguration->idConfiguration.'&documentID='.$document->id, false);
             ?>
             <a href="<?php echo $download_url;?>">                
                 <?php echo $document->fileName; ?>
@@ -213,23 +217,23 @@ if ($this->entrar == 0) {
     </script>
     <div class=""> 
         <?php if ($this->mensaje != '') { ?>
-            <p style="color: #ff0000;"><?php echo $this->mensaje; ?></p>
+            <p style="color: #ff0000;"><?= $this->mensaje ?></p>
         <?php } ?>
-        <h3 class="contentpassword-title"><?php echo JText::_('COM_LOGICALDOC_RESTRICTED_CONTENT') ?></h3>
-        <p class="contentpassword-description"><?php echo JText::_('COM_LOGICALDOC_PROTECTED_AREA') ?><br>
-            <?php echo JText::_('COM_LOGICALDOC_PRIVATE_DESCRIPTION') ?></p>
+        <h3 class="contentpassword-title"><?= Text::_('COM_LOGICALDOC_RESTRICTED_CONTENT') ?></h3>
+        <p class="contentpassword-description"><?= Text::_('COM_LOGICALDOC_PROTECTED_AREA') ?><br>
+            <?= Text::_('COM_LOGICALDOC_PRIVATE_DESCRIPTION') ?></p>
         <form action= "" method="post" id="formAcceso" name="formAcceso" class="contentpassword-form">
             <table>
                 <tr>
-                    <td align="right"><?php echo JText::_('COM_LOGICALDOC_PASSWORD') ?></td>
+                    <td align="right"><?= Text::_('COM_LOGICALDOC_PASSWORD') ?></td>
                     <td><input type="password" name="accessPassword" id="accessPassword" value=""/></td>
-                    <td><button id="enviar"><?php echo JText::_('COM_LOGICALDOC_SEND'); ?></button></td>
+                    <td><button id="enviar"><?= Text::_('COM_LOGICALDOC_SEND') ?></button></td>
                 </tr>
             </table>        
             <input type="hidden" name="option" value="com_logicaldoc" />
             <input type="hidden" name="view" value="explorer"/>            
             <input type="hidden" name="task" value="" /> 
-            <input type="hidden" name="id" value="<?php echo $this->rowConfiguration->idConfiguration; ?>"/>
+            <input type="hidden" name="id" value="<?= $this->rowConfiguration->idConfiguration ?>"/>
         </form>
     </div>
     <?php
@@ -270,17 +274,17 @@ if ($this->entrar == 0) {
 
 		$this->LDAuth->logout(array('sid' => $this->token));
         ?>
-        <h3><?php echo JText::_('COM_LOGICALDOC_PATH'); ?>:
+        <h3><?= Text::_('COM_LOGICALDOC_PATH') ?>:
             <!--
 			<?php            
             for ($i = 0; $i < count($folderPath); $i++) {
                 ?> 
-                <a href="index.php?option=com_logicaldoc&view=explorer&task=folder&folderID=<?php echo $folderPath[$i]->id; ?>" >
+                <a href="index.php?option=com_logicaldoc&view=explorer&task=folder&folderID=<?= $folderPath[$i]->id ?>" >
 					<?php
                     if ($i != 0) {
                         echo '/' . $folderPath[$i]->name;
                     } else {
-                        echo JText::_('COM_LOGICALDOC_HOME');
+                        echo Text::_('COM_LOGICALDOC_HOME');
                     }
                     ?>                                  
                 </a>           
@@ -288,7 +292,7 @@ if ($this->entrar == 0) {
             -->
 			<?php 
       
- 		    $exitemid = JFactory::getApplication()->input->get('Itemid');
+ 		    $exitemid = Factory::getApplication()->input->get('Itemid');
      
             $canprint = 0;
             $startFolder = $this->rowConfiguration->ldFolderID;  
@@ -302,12 +306,12 @@ if ($this->entrar == 0) {
 					 $folderPathUri .= "&Itemid=" .$exitemid;
 				  }
                 ?> 
-                <a href="<?php echo $folderPathUri; ?>" >
+                <a href="<?= $folderPathUri ?>" >
 					<?php
                     if ($i != 0) {
                         echo '/' . $folderPath[$i]->name;
                     } else {
-                        echo JText::_('COM_LOGICALDOC_HOME');
+                        echo Text::_('COM_LOGICALDOC_HOME');
                     }
                     ?>                                  
                 </a>           
@@ -316,12 +320,12 @@ if ($this->entrar == 0) {
 
         <div id="basic" style="display:inline-block; " width="100%">
             <form method="post" action="" name="formSearch" id="formSearch">
-                <span><?php echo JText::_('COM_LOGICALDOC_SEARCH_BY_CONTENT') ?>:</span>    
+                <span><?= Text::_('COM_LOGICALDOC_SEARCH_BY_CONTENT') ?>:</span>
                 <span><input type="text" name="contenido" id="contenido" value="" size="50" class="validate[required] text-input"/> </span>
                 <span><button id="searchBasic"><img src="components/com_logicaldoc/assets/images/search.png" width="16"  /></button></span>                
                 <input type="hidden" name="option" value="com_logicaldoc" />
                 <input type="hidden" name="view" value="explorer"/>
-                <input type="hidden" name="id" value="<?php echo $this->rowConfiguration->idConfiguration; ?>"/>
+                <input type="hidden" name="id" value="<?= $this->rowConfiguration->idConfiguration ?>"/>
                 <input type="hidden" name="task" value="" />
                 <input type="hidden" name="documento" id="documento" value="1" />                       
             </form>
@@ -329,16 +333,16 @@ if ($this->entrar == 0) {
         <div id="advanced" style="display: none;">
             <?php require_once ('form.php'); ?>
         </div>
-        <span style="float: right; margin: 10px;" id="spanAdvancedSearch" ><input type="checkbox" name="cbSearchAdvanced" id="cbSearchAdvanced" /><label id="lSearch" for="cbSearchAdvanced"><?php echo JText::_('COM_LOGICALDOC_ADVANCED_SEARCH'); ?></label> </span>
+        <span style="float: right; margin: 10px;" id="spanAdvancedSearch" ><input type="checkbox" name="cbSearchAdvanced" id="cbSearchAdvanced" /><label id="lSearch" for="cbSearchAdvanced"><?= Text::_('COM_LOGICALDOC_ADVANCED_SEARCH') ?></label> </span>
         <table id="tablaExplorer" width="100%" class="display">
             <thead>
                 <tr>
                     <th> </th>
-                    <th> <?php echo JText::_('COM_LOGICALDOC_NAME') ?></th>
-                    <th> <?php echo JText::_('COM_LOGICALDOC_SIZE') ?></th>
-                    <th> <?php echo JText::_('COM_LOGICALDOC_UPDATE_DATE') ?></th>
-                    <th> <?php echo JText::_('COM_LOGICALDOC_AUTHOR') ?></th>
-                    <th> <?php echo JText::_('COM_LOGICALDOC_VERSION') ?></th>
+                    <th> <?= Text::_('COM_LOGICALDOC_NAME') ?></th>
+                    <th> <?= Text::_('COM_LOGICALDOC_SIZE') ?></th>
+                    <th> <?= Text::_('COM_LOGICALDOC_UPDATE_DATE') ?></th>
+                    <th> <?= Text::_('COM_LOGICALDOC_AUTHOR') ?></th>
+                    <th> <?= Text::_('COM_LOGICALDOC_VERSION') ?></th>
                 </tr>
             </thead>
             <tbody id="tbodyExplorer">
@@ -373,6 +377,6 @@ if ($this->entrar == 0) {
             <tfoot>
         </table>
     <?php } else { ?>   
-        <h2><?php echo JText::_('COM_LOGICALDOC_ERROR_THE_CONFIGURATION_IS_NOT_CORRECT_PLEASE_CHECK_YOUR_LOGICALDOC_CONFIGURATION_TO_CONNECTO_TO') ?>.</h2>
+        <h2><?= Text::_('COM_LOGICALDOC_ERROR_THE_CONFIGURATION_IS_NOT_CORRECT_PLEASE_CHECK_YOUR_LOGICALDOC_CONFIGURATION_TO_CONNECTO_TO') ?>.</h2>
     <?php } ?>
 <?php } ?>

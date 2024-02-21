@@ -26,14 +26,19 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
 
-class LogicalDOCControllerExplorer extends JControllerLegacy
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\MVC\Controller\BaseController;
+
+class LogicalDOCControllerExplorer extends BaseController
 {
     public function folder()
     {
-        JFactory::getApplication()->input->set('view', 'explorer');
-        JFactory::getApplication()->input->set('layout', 'view');
+        Factory::getApplication()->input->set('view', 'explorer');
+        Factory::getApplication()->input->set('layout', 'view');
         $entrar = 1;
-        JFactory::getApplication()->input->set('entrar', $entrar);
+        Factory::getApplication()->input->set('entrar', $entrar);
         $this->display();
     }
 
@@ -47,8 +52,8 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
         require_once(JPATH_COMPONENT . '/clase.php');
         require_once(JPATH_COMPONENT . '/IconSelector.php');
 
-        $configID = JFactory::getApplication()->input->get('id');
-        $docID = JFactory::getApplication()->input->get('documentID');
+        $configID = Factory::getApplication()->input->get('id');
+        $docID = Factory::getApplication()->input->get('documentID');
 
         $modelConfiguration = new Configuration($configID);
         $user = $user = $modelConfiguration->getUsuario();
@@ -96,40 +101,40 @@ class LogicalDOCControllerExplorer extends JControllerLegacy
     public function enviar()
     {
         require_once(JPATH_COMPONENT . '/tables/configuration.php');
-        $rowConfiguration = &JTable::getInstance('Configuration', 'Table');
-        $id = JFactory::getApplication()->input->get('id');
+        $rowConfiguration = Table::getInstance('Configuration', 'Table');
+        $id = Factory::getApplication()->input->get('id');
         $rowConfiguration->load($id);
         $accessPassword = $rowConfiguration->accessPassword;
-        $acceder = JFactory::getApplication()->input->get('accessPassword');
-        JFactory::getApplication()->input->set('view', 'explorer');
-        JFactory::getApplication()->input->set('layout', 'view');
+        $acceder = Factory::getApplication()->input->get('accessPassword');
+        Factory::getApplication()->input->set('view', 'explorer');
+        Factory::getApplication()->input->set('layout', 'view');
         $entrar = 0;
-        $mensaje = JText::_('COM_LOGICALDOC_INCORRECT_PASSWORD');
+        $mensaje = Text::_('COM_LOGICALDOC_INCORRECT_PASSWORD');
         if (substr_compare($accessPassword, $acceder, 0) == 0) {
             $entrar = 1;
-            $mensaje = JText::_('COM_LOGICALDOC_CORRECT_PASSWORD');
+            $mensaje = Text::_('COM_LOGICALDOC_CORRECT_PASSWORD');
         }
-        JFactory::getApplication()->input->set('entrar', $entrar);
-        JFactory::getApplication()->input->set('mensaje', $mensaje);
+        Factory::getApplication()->input->set('entrar', $entrar);
+        Factory::getApplication()->input->set('mensaje', $mensaje);
         $this->display();
     }
 
     public function searchBasic()
     {
-        JFactory::getApplication()->input->set('view', 'search');
-        JFactory::getApplication()->input->set('layout', 'result');
-        JFactory::getApplication()->input->set('contenido', JFactory::getApplication()->input->get('contenido'));
-        JFactory::getApplication()->input->set('documento', JFactory::getApplication()->input->get('documento'));
-        JFactory::getApplication()->input->set('carpeta', JFactory::getApplication()->input->get('carpeta'));
+        Factory::getApplication()->input->set('view', 'search');
+        Factory::getApplication()->input->set('layout', 'result');
+        Factory::getApplication()->input->set('contenido', Factory::getApplication()->input->get('contenido'));
+        Factory::getApplication()->input->set('documento', Factory::getApplication()->input->get('documento'));
+        Factory::getApplication()->input->set('carpeta', Factory::getApplication()->input->get('carpeta'));
         $this->display();
     }
 
     public function returnDesktop()
     {
-        JFactory::getApplication()->input->set('view', 'explorer');
-        JFactory::getApplication()->input->set('layout', 'view');
+        Factory::getApplication()->input->set('view', 'explorer');
+        Factory::getApplication()->input->set('layout', 'view');
         $entrar = 1;
-        JFactory::getApplication()->input->set('entrar', $entrar);
+        Factory::getApplication()->input->set('entrar', $entrar);
         $this->display();
     }
 }
