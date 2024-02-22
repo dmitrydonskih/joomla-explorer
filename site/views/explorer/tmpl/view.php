@@ -155,12 +155,10 @@ function printFolder($folder, $rowConfiguration, $exitemid = null) {
 		   <img style="text-align: center" src="components/com_logicaldoc/assets/images/menuitem_childs.png" />
         </td>
         <td>
-            <a href="<?php echo $folderUrl; ?>" >
-                <?php echo $folder->name; ?>
-            </a>
+            <a href="<?= $folderUrl ?>"><?= $folder->name ?></a>
         </td>
         <td> </td>
-        <td><?php echo $folder->creator ?></td>
+        <td><?= $folder->creator ?></td>
         <td>            
             <?php
 			$ymd = DateTime::createFromFormat('Y-m-d H:i:s O', $folder->creation);
@@ -184,12 +182,10 @@ function printDocument($document, $rowConfiguration) {
             <?php 
             $download_url = Route::_('index.php?option=com_logicaldoc&view=explorer&task=download&id='.$rowConfiguration->idConfiguration.'&documentID='.$document->id, false);
             ?>
-            <a href="<?php echo $download_url;?>">                
-                <?php echo $document->fileName; ?>
-            </a>               
+            <a href="<?= $download_url ?>"><?= $document->fileName ?></a>
         </td>
-        <td><?php echo $document->fileVersion; ?></td>
-        <td><?php echo $document->creator; ?></td>
+        <td><?= $document->fileVersion ?></td>
+        <td><?= $document->creator ?></td>
         <td style="white-space: nowrap;">
             <?php
 			$ymd = DateTime::createFromFormat('Y-m-d H:i:s O', $document->date);
@@ -197,8 +193,8 @@ function printDocument($document, $rowConfiguration) {
 			echo $ymd->format('c');
             ?>
         </td>
-        <td><?php echo $document->type; ?></td>
-        <td style="white-space: nowrap; text-align: right;"><?php echo $document->fileSize; ?></td>
+        <td><?= $document->type ?></td>
+        <td style="white-space: nowrap; text-align: right;"><?= $document->fileSize ?></td>
     </tr>
     <?php
 }
@@ -230,7 +226,7 @@ if ($this->entrar == 0) {
         <form action= "" method="post" id="formAcceso" name="formAcceso" class="contentpassword-form">
             <table>
                 <tr>
-                    <td align="right"><?= Text::_('COM_LOGICALDOC_PASSWORD') ?></td>
+                    <td style="text-align: right"><?= Text::_('COM_LOGICALDOC_PASSWORD') ?></td>
                     <td><input type="password" name="accessPassword" id="accessPassword" value=""/></td>
                     <td><button id="enviar"><?= Text::_('COM_LOGICALDOC_SEND') ?></button></td>
                 </tr>
