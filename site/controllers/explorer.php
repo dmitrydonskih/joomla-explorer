@@ -123,7 +123,7 @@ class LogicalDOCControllerExplorer extends BaseController
     {
         Factory::getApplication()->input->set('view', 'search');
         Factory::getApplication()->input->set('layout', 'result');
-        Factory::getApplication()->input->set('contenido', Factory::getApplication()->input->get('contenido'));
+        Factory::getApplication()->input->set('contenido', Factory::getApplication()->input->get('contenido','','string'));
         Factory::getApplication()->input->set('documento', Factory::getApplication()->input->get('documento'));
         Factory::getApplication()->input->set('carpeta', Factory::getApplication()->input->get('carpeta'));
         $this->display();

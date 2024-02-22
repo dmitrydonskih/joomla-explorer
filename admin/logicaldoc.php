@@ -25,24 +25,24 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 ?>
 <!--Estilo para la tabla-->
-<link type="text/css" href="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/css/datatables/datatables.ui.css'; ?>" rel="stylesheet" />
+<link type="text/css" href="<?= JURI::base(true) . '/components/com_logicaldoc/assets/css/datatables/datatables.ui.css' ?>" rel="stylesheet" />
 
-<link type="text/css" href="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/css/themes/jquery-ui-1.8.23.custom.css'; ?>" rel="stylesheet" />
+<link type="text/css" href="<?= JURI::base(true) . '/components/com_logicaldoc/assets/css/themes/jquery-ui-1.8.23.custom.css' ?>" rel="stylesheet" />
 <!--Estilo para la validacion-->
-<link type="text/css" href="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/css/validationEngine.jquery.css'; ?>" rel="stylesheet" />
+<link type="text/css" href="<?= JURI::base(true) . '/components/com_logicaldoc/assets/css/validationEngine.jquery.css' ?>" rel="stylesheet" />
 
 <!--Script de jquery-->
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery-1.8.0.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery-ui-1.8.23.custom.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery.ui.datepicker-es.js'; ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery-1.8.0.min.js' ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery-ui-1.8.23.custom.min.js' ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery.ui.datepicker-es.js' ?>"></script>
 <!--Tabs-->
 
 <!--script para la validacion-->
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/validador/jquery.validationEngine-en.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/validador/jquery.validationEngine.js'; ?>"></script>
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/validador/jquery.numeric.js'; ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/validador/jquery.validationEngine-en.js' ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/validador/jquery.validationEngine.js' ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/validador/jquery.numeric.js' ?>"></script>
 <!--script para la tabla-->
-<script type="text/javascript" src="<?php echo JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery.dataTables-1.9.4.js'; ?>"></script>
+<script type="text/javascript" src="<?= JURI::base(true) . '/components/com_logicaldoc/assets/js/jquery.dataTables-1.9.4.js' ?>"></script>
 
 <?php
 $controller = Factory::getApplication()->input->get('view');

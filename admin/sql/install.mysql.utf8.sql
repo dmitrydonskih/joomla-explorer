@@ -12,6 +12,7 @@ CREATE TABLE jos_logicaldoc_configuration(
     updateDate int,
     author int,
     version int,
+    type int,
     showEntries int,
     PRIMARY KEY(idConfiguration)
 );

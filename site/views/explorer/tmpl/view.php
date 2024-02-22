@@ -42,11 +42,13 @@ use Joomla\CMS\Router\Route;
         var updateDate = <?= $this->rowConfiguration->updateDate ?>;
         var author = <?= $this->rowConfiguration->author ?>;
         var version = <?= $this->rowConfiguration->version ?>;
+        var ldtype = <?= $this->rowConfiguration->type ?>;
         var iconValor = false;
         var sizeValor = false;
         var updateDateValor = false;
         var authorValor = false;
         var versionValor = false;
+        var typeValor = false;
         if (icon == 1) {
             iconValor = true;
         }
@@ -62,6 +64,9 @@ use Joomla\CMS\Router\Route;
         if (version == 1) {
             versionValor = true;
         }
+        if (ldtype == 1) {
+            typeValor = true;
+        }
         var asInitVals = new Array();
         var oTable = $('#tablaExplorer').dataTable({
             "bJQueryUI": true,
@@ -71,6 +76,21 @@ use Joomla\CMS\Router\Route;
             "aoColumns": [
                 {"bSortable": false, "bSearchable": false, "bVisible": iconValor},
                 {"bSortable": true, "bVisible": true},
+                {"bSortable": false, "bVisible": versionValor},
+                {"bSortable": true, "bVisible": authorValor},
+                {"bSortable": true, "bVisible": updateDateValor,
+                    "mRender": function(date, type, full) {
+                        if (type == 'display') {
+                            var mydt = new Date(date);
+                            //return mydt.toLocaleDateString() + " " + mydt.toLocaleTimeString();
+                            var localDate = mydt.toLocaleDateString(navigator.language, {year: 'numeric', month: '2-digit', day: '2-digit'});
+                            var localTime = mydt.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+                            return localDate + " " + localTime;
+                        }
+                        return date;
+                    }
+                },
+                {"bSortable": true, "bVisible": typeValor},
                 {"bSortable": true, "bVisible": sizeValor,
                     "mRender": function(size, type, full) {
                         if (type == 'display') {
@@ -81,18 +101,7 @@ use Joomla\CMS\Router\Route;
                         }
                         return size;
                     }
-                },
-                {"bSortable": true, "bVisible": updateDateValor,
-					"mRender": function(date, type, full) {
-									if (type == 'display') {
-										var mydt = new Date(date);
-							    		return mydt.toLocaleDateString() + " " + mydt.toLocaleTimeString();
-							  		}
-                                  return date;
-                               }
-      			},
-                {"bSortable": true, "bVisible": authorValor},
-                {"bSortable": false, "bVisible": versionValor}
+                }
             ],
             "aaSorting": [[0, "asc"]],
             "oLanguage": {
@@ -151,17 +160,16 @@ function printFolder($folder, $rowConfiguration, $exitemid = null) {
             </a>
         </td>
         <td> </td>
+        <td><?php echo $folder->creator ?></td>
         <td>            
             <?php
 			$ymd = DateTime::createFromFormat('Y-m-d H:i:s O', $folder->creation);
 			//echo $ymd->format('d/m/Y H:i:s');
 			echo $ymd->format('c');
             ?>
-        </td>        
-        <td>
-            <?php echo $folder->creator ?>
-        </td>        
-        <td> </td> 
+        </td>
+        <td> </td>
+        <td> </td>
     </tr>
     <?php
 }
@@ -180,20 +188,17 @@ function printDocument($document, $rowConfiguration) {
                 <?php echo $document->fileName; ?>
             </a>               
         </td>
-        <td style="white-space: nowrap; text-align: right;"><?php echo $document->fileSize; ?></td>
-        <td>
+        <td><?php echo $document->fileVersion; ?></td>
+        <td><?php echo $document->creator; ?></td>
+        <td style="white-space: nowrap;">
             <?php
 			$ymd = DateTime::createFromFormat('Y-m-d H:i:s O', $document->date);
 			//echo $ymd->format('d/m/Y H:i:s');
 			echo $ymd->format('c');
             ?>
         </td>
-        <td>
-            <?php echo $document->creator; ?>
-        </td>
-        <td>
-            <?php echo $document->fileVersion; ?>
-        </td>    
+        <td><?php echo $document->type; ?></td>
+        <td style="white-space: nowrap; text-align: right;"><?php echo $document->fileSize; ?></td>
     </tr>
     <?php
 }
@@ -337,12 +342,13 @@ if ($this->entrar == 0) {
         <table id="tablaExplorer" width="100%" class="display">
             <thead>
                 <tr>
-                    <th> </th>
-                    <th> <?= Text::_('COM_LOGICALDOC_NAME') ?></th>
-                    <th> <?= Text::_('COM_LOGICALDOC_SIZE') ?></th>
-                    <th> <?= Text::_('COM_LOGICALDOC_UPDATE_DATE') ?></th>
-                    <th> <?= Text::_('COM_LOGICALDOC_AUTHOR') ?></th>
-                    <th> <?= Text::_('COM_LOGICALDOC_VERSION') ?></th>
+                    <th></th>
+                    <th><?= Text::_('COM_LOGICALDOC_NAME') ?></th>
+                    <th><?= Text::_('COM_LOGICALDOC_VERSION') ?></th>
+                    <th><?= Text::_('COM_LOGICALDOC_AUTHOR') ?></th>
+                    <th><?= Text::_('COM_LOGICALDOC_UPDATE_DATE') ?></th>
+                    <th>Type</th>
+                    <th><?= Text::_('COM_LOGICALDOC_SIZE') ?></th>
                 </tr>
             </thead>
             <tbody id="tbodyExplorer">

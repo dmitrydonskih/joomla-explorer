@@ -40,6 +40,7 @@ class TableConfiguration extends Table {
     public $updateDate = 0;
     public $author = 0;
     public $version = 0;
+    public $type = 0;
     public $showEntries;
 
     public function __construct(&$db) {

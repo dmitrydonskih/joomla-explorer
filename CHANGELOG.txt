@@ -1,4 +1,11 @@
-v4.0.0 - 19/02/2024 (June 19, 2024)
+v4.1.0 - 22/02/2024 (February 22, 2024)
+Compatible with Joomla! 5 without B/C plugin
+Ability to order by document type
+Ability to search by category of documents
+Improved formatting of dates and times
+Developed and tested on Joomla! 4.4.2 Stable against LogicalDOC 8.9 with PHP 8.1.25
+
+v4.0.0 - 19/02/2024 (February 19, 2024)
 This plugin has beeen developed and tested on Joomla! 4.4.2 Stable against LogicalDOC 8.9 with PHP 8.1.25
 
 v1.0.7 - 10/06/2022 (June 10, 2022)

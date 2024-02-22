@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updates>
+   <update>
+      <name>LogicalDOC</name>
+      <description>LogicalDOC file browser</description>
+      <element>com_logicaldoc</element>
+      <type>component</type>
+      <folder/>
+      <client>site</client>
+      <version>4.1.0</version>
+      <infourl title="LogicalDOC file browser 4.1.0">https://wiki.logicaldoc.com/wiki/LogicalDOC_Joomla_Explorer</infourl>
+      <downloads>
+         <downloadurl type="full" format="zip">https://s3.amazonaws.com/logicaldoc-dist/joomla/com_logicaldoc_v4.1.zip</downloadurl>
+      </downloads>
+      <tags>
+        <tag>stable</tag>
+      </tags>      
+      <maintainer>LogicalDOC - logicaldoc.com</maintainer>
+      <maintainerurl>https://www.logicaldoc.com</maintainerurl>
+      <section>LogicalDOC</section>
+      <targetplatform name="joomla" version="4\.*|5\.*"/>
+      <php_minimum>7.4.0</php_minimum>
+      <sha256>94409E341A5DDA6DC9390106BC8C3FDE74D76A651DF7563D4245549C16A1BC4C</sha256>
+   </update>
+</updates>
