@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS jos_logicaldoc_configuration;
+DROP TABLE IF EXISTS #__logicaldoc_configuration;

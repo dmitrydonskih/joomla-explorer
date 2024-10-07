@@ -44,7 +44,7 @@ class TableConfiguration extends Table {
     public $showEntries;
 
     public function __construct(&$db) {
-        parent::__construct('jos_logicaldoc_configuration', 'idConfiguration', $db);
+        parent::__construct('#__logicaldoc_configuration', 'idConfiguration', $db);
     }
 
 }

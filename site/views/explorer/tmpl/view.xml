@@ -1,1 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><metadata>    <layout title="COM_LOGICALDOC_DESCRIPTION">        <message>            <![CDATA[COM_LOGICALDOC_DESCRIPTION]]>        </message>    </layout>    <fields name="params">        <fieldset name="basic" label="COM_LOGICALDOC_MENU_CONFIGURATION_LOGICALDOC">            <field name="name" type="sql"                   label="COM_LOGICALDOC_MENU_SELECT"                   query="SELECT name AS value, name FROM jos_logicaldoc_configuration"/>        </fieldset>    </fields></metadata>
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_LOGICALDOC_DESCRIPTION">
+        <message>
+            <![CDATA[COM_LOGICALDOC_DESCRIPTION]]>
+        </message>
+    </layout>
+    <fields name="params">
+        <fieldset name="basic" label="COM_LOGICALDOC_MENU_CONFIGURATION_LOGICALDOC">
+            <field name="name" type="sql"
+                   label="COM_LOGICALDOC_MENU_SELECT"
+                   query="SELECT name AS value, name FROM #__logicaldoc_configuration"/>
+        </fieldset>
+    </fields>
+</metadata>

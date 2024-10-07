@@ -1,4 +1,4 @@
-CREATE TABLE jos_logicaldoc_configuration(
+CREATE TABLE #__logicaldoc_configuration(
     idConfiguration INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(50),
     username VARCHAR(50),
